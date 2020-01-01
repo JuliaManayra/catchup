@@ -7,36 +7,43 @@ import org.hibernate.validator.constraints.br.CPF;
 import com.julia.api.catchup.dominio.validacao.Senha;
 
 @Senha
-public class FuncionarioNovo {
+public class FuncionarioVisualizar {
 	
 	private String nome;
-	private String senha;
-	private String senhaConfirmacao;
+
 	private String emailRecupercao;
 	private Integer perfil;
+	
 	private String emailRecuperacao;
 	
 	private String filial;
 	
 	private Date nascimento;
+	
+	
 	@CPF
 	private String cpf;
 	
 	
-	public FuncionarioNovo() {
+	public FuncionarioVisualizar() {
 		
 	}
 
-	public FuncionarioNovo(String nome, String senha, String senhaConfirmacao, String emailRecupercao, Integer perfil,
-			@CPF String cpf) {
+	
+
+	public FuncionarioVisualizar(String nome, String emailRecupercao, Integer perfil, String emailRecuperacao,
+			String filial, Date nascimento, @CPF String cpf) {
 		super();
 		this.nome = nome;
-		this.senha = senha;
-		this.senhaConfirmacao = senhaConfirmacao;
 		this.emailRecupercao = emailRecupercao;
 		this.perfil = perfil;
+		this.emailRecuperacao = emailRecuperacao;
+		this.filial = filial;
+		this.nascimento = nascimento;
 		this.cpf = cpf;
 	}
+
+
 
 	public Integer getPerfil() {
 		return perfil;
@@ -54,21 +61,7 @@ public class FuncionarioNovo {
 		this.nome = nome;
 	}
 
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
-	public String getSenhaConfirmacao() {
-		return senhaConfirmacao;
-	}
-
-	public void setSenhaConfirmacao(String senhaConfirmacao) {
-		this.senhaConfirmacao = senhaConfirmacao;
-	}
+	
 
 	public String getEmailRecupercao() {
 		return emailRecupercao;
