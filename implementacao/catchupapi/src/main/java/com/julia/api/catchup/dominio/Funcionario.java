@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.validator.constraints.br.CPF;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Funcionario implements Serializable{
@@ -31,8 +33,10 @@ public class Funcionario implements Serializable{
 	
 	private String emailRecuperacao;
 	
-	
+	@JsonIgnore
 	private String senha;
+	
+	@JsonIgnore
 	private String senhaConfirmacao;
 	
 	private String filial;
@@ -43,8 +47,13 @@ public class Funcionario implements Serializable{
 	@JoinColumn(name="fk_perfil")
 	private Perfil perfil;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="funcionarioCriador", cascade=CascadeType.ALL)
 	private List<Aviso> listaAvisos;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="funcionarioCriador", cascade=CascadeType.ALL)
+	private List<Parceria> listaParcerias;
 	
 	public Integer getId() {
 		return id;
