@@ -12,9 +12,7 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.validator.constraints.br.CPF;
 
-import com.julia.api.catchup.dominio.validacao.Senha;
 
-@Senha
 @Entity
 public class Funcionario {
 

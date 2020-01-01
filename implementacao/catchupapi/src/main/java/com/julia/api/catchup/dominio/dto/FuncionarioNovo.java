@@ -1,9 +1,10 @@
 package com.julia.api.catchup.dominio.dto;
 
-import java.io.Serializable;
-
 import org.hibernate.validator.constraints.br.CPF;
 
+import com.julia.api.catchup.dominio.validacao.Senha;
+
+@Senha
 public class FuncionarioNovo {
 	
 	private String nome;
