@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -54,6 +56,15 @@ public class Funcionario implements Serializable{
 	@JsonIgnore
 	@OneToMany(mappedBy="funcionarioCriador", cascade=CascadeType.ALL)
 	private List<Parceria> listaParcerias;
+	
+	@JsonIgnore
+	 @ManyToMany(cascade = CascadeType.ALL)
+	    @JoinTable(name = "curte", 
+	      joinColumns = @JoinColumn(name = "fk_funcionario", referencedColumnName = "id"), 
+	      inverseJoinColumns = @JoinColumn(name = "fk_post", 
+	      referencedColumnName = "id"))
+	 private List<Post> listaPostsCurtidos; 
+	
 	
 	public Integer getId() {
 		return id;
@@ -133,6 +144,25 @@ public class Funcionario implements Serializable{
 
 	public void setListaAvisos(List<Aviso> listaAvisos) {
 		this.listaAvisos = listaAvisos;
+	}
+
+	
+	
+	
+	public List<Parceria> getListaParcerias() {
+		return listaParcerias;
+	}
+
+	public void setListaParcerias(List<Parceria> listaParcerias) {
+		this.listaParcerias = listaParcerias;
+	}
+
+	public List<Post> getListaPostsCurtidos() {
+		return listaPostsCurtidos;
+	}
+
+	public void setListaPostsCurtidos(List<Post> listaPostsCurtidos) {
+		this.listaPostsCurtidos = listaPostsCurtidos;
 	}
 
 	@Override
