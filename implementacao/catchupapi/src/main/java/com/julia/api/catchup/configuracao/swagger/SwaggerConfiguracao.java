@@ -15,10 +15,10 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
 @Configuration
-public class ConfiguracaoSwagger {
+public class SwaggerConfiguracao {
 	
 	@Bean
-	public Docket forumApi() {
+	public Docket Api() {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
 				.apis(RequestHandlerSelectors.basePackage("com.julia.api.catchup"))
