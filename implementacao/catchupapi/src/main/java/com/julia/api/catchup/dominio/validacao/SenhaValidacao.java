@@ -7,7 +7,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import com.julia.api.catchup.dominio.dto.FuncionarioNovoDto;
-import com.julia.api.catchup.excessao.FieldMessage;
+import com.julia.api.catchup.excessao.dto.FieldMessage;
 
 public class SenhaValidacao implements ConstraintValidator<Senha, FuncionarioNovoDto> {
 

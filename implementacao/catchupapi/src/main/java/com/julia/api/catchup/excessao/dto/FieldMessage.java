@@ -1,4 +1,4 @@
-package com.julia.api.catchup.excessao;
+package com.julia.api.catchup.excessao.dto;
 
 import java.io.Serializable;
 

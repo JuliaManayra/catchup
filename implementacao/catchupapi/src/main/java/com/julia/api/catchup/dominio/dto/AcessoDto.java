@@ -1,5 +1,6 @@
 package com.julia.api.catchup.dominio.dto;
 
+
 import org.hibernate.validator.constraints.br.CPF;
 
 public class AcessoDto {

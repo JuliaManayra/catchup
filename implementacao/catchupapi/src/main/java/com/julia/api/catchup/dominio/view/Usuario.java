@@ -28,6 +28,8 @@ public class Usuario implements Serializable,UserDetails {
 	@JoinColumn(name="fk_role")
 	private Role role;
 
+	private Boolean status;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -50,6 +52,17 @@ public class Usuario implements Serializable,UserDetails {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	
+	
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
 	}
 
 	@Override
@@ -109,7 +122,7 @@ public class Usuario implements Serializable,UserDetails {
 
 	@Override
 	public boolean isEnabled() {
-		return true;
+		return this.status;
 	}
 	
 	

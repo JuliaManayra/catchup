@@ -29,7 +29,11 @@ public class AutenticacaoService  implements UserDetailsService {
 		return new UsernamePasswordAuthenticationToken(acessoDto.getCpf(), acessoDto.getSenha());
 	}
 	
+	public UsernamePasswordAuthenticationToken autentificacaoUsuario(Usuario usuario, String senha) {
+		return new UsernamePasswordAuthenticationToken(usuario,senha, usuario.getAuthorities());
+	}
+	
 	public UsernamePasswordAuthenticationToken autentificacaoUsuario(Usuario usuario) {
-		return new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
+		return new UsernamePasswordAuthenticationToken(usuario,null, usuario.getAuthorities());
 	}
 }

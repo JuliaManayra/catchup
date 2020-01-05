@@ -1,9 +1,12 @@
 package com.julia.api.catchup.dominio.dto;
 
 import java.sql.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.hibernate.validator.constraints.br.CPF;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.julia.api.catchup.dominio.validacao.Senha;
 
 @Senha
@@ -22,6 +25,8 @@ public class FuncionarioNovoDto {
 	@CPF
 	private String cpf;
 	
+	@JsonIgnore
+	private Boolean status = true;
 	
 	public FuncionarioNovoDto() {
 		
@@ -35,7 +40,7 @@ public class FuncionarioNovoDto {
 		this.senhaConfirmacao = senhaConfirmacao;
 		this.emailRecupercao = emailRecupercao;
 		this.perfil = perfil;
-		this.cpf = cpf;
+		this.cpf = mascaraCpf(cpf);
 	}
 
 	public Integer getPerfil() {
@@ -83,7 +88,7 @@ public class FuncionarioNovoDto {
 	}
 
 	public void setCpf(String cpf) {
-		this.cpf = cpf;
+		this.cpf = mascaraCpf(cpf);
 	}
 
 	public String getEmailRecuperacao() {
@@ -109,8 +114,28 @@ public class FuncionarioNovoDto {
 	public void setNascimento(Date nascimento) {
 		this.nascimento = nascimento;
 	}
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
 	
+	private Boolean verificaCpf(String cpf ) {
+		Pattern pattern =  Pattern.compile("(^(\\d{3}.\\d{3}.\\d{3}-\\d{2}))");
+		Matcher matcher = pattern.matcher(cpf);
+		return matcher.matches();
+	}
 	
+	private String mascaraCpf(String cpf) {
+		
+		 if (verificaCpf(cpf)==false && cpf.length()==11) {
+			 return cpf.substring(0,3)+"."+cpf.substring(3,6)+"."+cpf.substring(6,9)+"-"+cpf.substring(9,11);
+		 }
+		return cpf;
+	}
 	
 	
 
