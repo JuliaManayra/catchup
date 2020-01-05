@@ -14,6 +14,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+
 import com.julia.api.catchup.service.TokenService;
 import com.julia.api.catchup.service.UsuarioService;
 
@@ -49,12 +50,17 @@ public class ConfiguracaoSeguranca extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		.antMatchers(HttpMethod.GET, "/topicos").permitAll()
 		.antMatchers(HttpMethod.GET, "/topicos/*").permitAll()
-		.antMatchers(HttpMethod.POST, "/auth").permitAll()
+		.antMatchers(HttpMethod.POST, "/acesso").permitAll()
 		.antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
-		.anyRequest().authenticated()
-		.and().csrf().disable()
-		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-		.and().addFilterBefore(new FilterAutentificacaoToken(tokenService, usuarioService), UsernamePasswordAuthenticationFilter.class);
+		.anyRequest()
+		.authenticated()
+		.and()
+		.csrf()
+		.disable()
+		.sessionManagement()
+		.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+		.and()
+		.addFilterBefore(new FilterAutentificacaoToken(tokenService, usuarioService), UsernamePasswordAuthenticationFilter.class);
 	}
 	
 	

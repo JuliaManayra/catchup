@@ -1,15 +1,20 @@
 package com.julia.api.catchup.dominio.view;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.springframework.security.core.GrantedAuthority;
 
-@Entity(name="vw_role")
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity(name="vw_perfil")
 public class Role implements Serializable, GrantedAuthority {
 	/**
 	 * 
@@ -19,6 +24,11 @@ public class Role implements Serializable, GrantedAuthority {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String descricao;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="role", cascade=CascadeType.ALL)
+	private List<Usuario> perfil;
+	
 	
 	
 	public Integer getId() {
@@ -32,6 +42,14 @@ public class Role implements Serializable, GrantedAuthority {
 	}
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	
+	
+	public List<Usuario> getPerfil() {
+		return perfil;
+	}
+	public void setPerfil(List<Usuario> perfil) {
+		this.perfil = perfil;
 	}
 	@Override
 	public int hashCode() {

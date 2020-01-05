@@ -66,6 +66,8 @@ public class Funcionario implements Serializable{
 	 private List<Post> listaPostsCurtidos; 
 	
 	
+	private Boolean statusFuncionario;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -149,6 +151,14 @@ public class Funcionario implements Serializable{
 	
 	
 	
+	public Boolean getStatusFuncionario() {
+		return statusFuncionario;
+	}
+
+	public void setStatusFuncionario(Boolean statusFuncionario) {
+		this.statusFuncionario = statusFuncionario;
+	}
+
 	public List<Parceria> getListaParcerias() {
 		return listaParcerias;
 	}

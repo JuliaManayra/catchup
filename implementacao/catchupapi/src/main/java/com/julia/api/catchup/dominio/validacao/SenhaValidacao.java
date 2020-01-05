@@ -6,13 +6,13 @@ import java.util.List;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import com.julia.api.catchup.dominio.dto.FuncionarioNovo;
+import com.julia.api.catchup.dominio.dto.FuncionarioNovoDto;
 import com.julia.api.catchup.excessao.FieldMessage;
 
-public class SenhaValidacao implements ConstraintValidator<Senha, FuncionarioNovo> {
+public class SenhaValidacao implements ConstraintValidator<Senha, FuncionarioNovoDto> {
 
 	@Override
-	public boolean isValid(FuncionarioNovo value, ConstraintValidatorContext context) {
+	public boolean isValid(FuncionarioNovoDto value, ConstraintValidatorContext context) {
 		List<FieldMessage> list = new ArrayList<>();		
 		if(!value.getSenha().equals(value.getSenhaConfirmacao())) {
 			list.add(new FieldMessage("senha","Senha e senha de confirmação não conferem!"));

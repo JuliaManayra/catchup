@@ -25,7 +25,8 @@ public class FilterAutentificacaoToken  extends OncePerRequestFilter {
 	@Autowired
 	private UsuarioService usuarioService;
 	
-	
+//	@Autowired
+//	private AutenticacaoService autenticacaoService;
 	
 	
 	
