@@ -60,12 +60,6 @@ public class UsuarioResource {
 		try {
 			 funcionarioService.editar(funcionarioNovo);
 			return ResponseEntity.ok("Cadastrado com Sucesso!");
-		}catch(DataIntegrityViolationException e) {
-			 String erro = e.getRootCause().getMessage();
-			 String[] er= erro.split("=");
-			 String resultado = er[1];
-			 resultado = resultado.replaceAll("already exists", "ja cadastrado");
-			return new ResponseEntity<>(resultado, null, HttpStatus.CONFLICT);
 		}catch (Exception e) {
 			return new ResponseEntity<>("false", null, HttpStatus.BAD_REQUEST);
 		}
