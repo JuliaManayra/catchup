@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 import javax.validation.constraints.Email;
 
 import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -46,8 +47,8 @@ public class FuncionarioNovoDto {
 			@CPF String cpf) {
 		super();
 		this.nome = nome;
-		this.senha = senha;
-		this.senhaConfirmacao = senhaConfirmacao;
+		this.senha = BCrypt.hashpw(senha, BCrypt.gensalt());
+		this.senhaConfirmacao = BCrypt.hashpw(senhaConfirmacao, BCrypt.gensalt());
 		this.idPerfil = idPerfil;
 		this.cpf = mascaraCpf(cpf);
 		this.id =null;
@@ -87,7 +88,7 @@ public class FuncionarioNovoDto {
 	}
 
 	public void setSenha(String senha) {
-		this.senha = senha;
+		this.senha =  BCrypt.hashpw(senha, BCrypt.gensalt());;
 	}
 
 	public String getSenhaConfirmacao() {
@@ -95,7 +96,7 @@ public class FuncionarioNovoDto {
 	}
 
 	public void setSenhaConfirmacao(String senhaConfirmacao) {
-		this.senhaConfirmacao = senhaConfirmacao;
+		this.senhaConfirmacao =  BCrypt.hashpw(senhaConfirmacao, BCrypt.gensalt());
 	}
 
 

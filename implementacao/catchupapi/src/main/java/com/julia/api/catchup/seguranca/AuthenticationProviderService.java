@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
+
 import com.julia.api.catchup.dominio.view.Usuario;
 import com.julia.api.catchup.service.CriptografiaService;
 import com.julia.api.catchup.service.UsuarioService;

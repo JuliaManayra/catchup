@@ -18,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 
 import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -119,7 +120,7 @@ public class Funcionario implements Serializable{
 	}
 
 	public void setSenhaConfirmacao(String senhaConfirmacao) {
-		this.senhaConfirmacao = senhaConfirmacao;
+		this.senhaConfirmacao =senhaConfirmacao;
 	}
 
 	public String getFilial() {

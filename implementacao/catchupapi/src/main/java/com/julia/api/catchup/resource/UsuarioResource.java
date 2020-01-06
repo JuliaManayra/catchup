@@ -13,11 +13,16 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import javax.servlet.http.HttpSession;
+
 
 import com.julia.api.catchup.dominio.dto.FuncionarioEditarDto;
+import com.julia.api.catchup.dominio.dto.FuncionarioEditarSenhaDto;
 import com.julia.api.catchup.dominio.dto.FuncionarioNovoDto;
 import com.julia.api.catchup.dominio.dto.FuncionarioVisualizarDto;
 import com.julia.api.catchup.service.FuncionarioService;
+
+
 
 @RestController
 @RequestMapping(value="/usuario")
@@ -65,4 +70,15 @@ public class UsuarioResource {
 		}
 	}
 	
+	
+	@PutMapping(value = "/alterarSenha")
+	public ResponseEntity<String> alterarSenha(@RequestBody @Valid  FuncionarioEditarSenhaDto funcionarioNovo, HttpSession session) {
+		try {
+			 String cpf = (String) session.getAttribute("cpf");
+			 funcionarioService.alterarSenha(funcionarioNovo,cpf);
+			return ResponseEntity.ok("Senha alterada com Sucesso!");
+		}catch (Exception e) {
+			return new ResponseEntity<>("false", null, HttpStatus.BAD_REQUEST);
+		}
+	}
 }

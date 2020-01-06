@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.julia.api.catchup.dominio.dto.FuncionarioEditarDto;
+import com.julia.api.catchup.dominio.dto.FuncionarioEditarSenhaDto;
 import com.julia.api.catchup.dominio.dto.FuncionarioNovoDto;
 import com.julia.api.catchup.dominio.dto.FuncionarioVisualizarDto;
+import com.julia.api.catchup.dominio.view.Usuario;
 import com.julia.api.catchup.implementacao.CrudImplementacaoFuncionarioNovo;
 import com.julia.api.catchup.implementacao.EditarFuncionarioImplementacao;
+import com.julia.api.catchup.implementacao.EditarSenhaFuncionarioImplementacao;
 import com.julia.api.catchup.implementacao.VisualizarFuncionarioImplementacao;
 import com.julia.api.catchup.interfaces.EditarCatchupInterface;
 import com.julia.api.catchup.interfaces.SalvarCatchupInterface;
@@ -21,24 +24,15 @@ public class FuncionarioService{
 	@Autowired
 	private FuncionarioRepositorio funcionarioRepositorio;
 
+
 	@Autowired
-	private CriptografiaService criptografiaService;
-
-	
-	
-	private FuncionarioNovoDto trataDados(FuncionarioNovoDto funcionarioNovoDto) {
-
-		funcionarioNovoDto.setSenha(criptografiaService.encriptar(funcionarioNovoDto.getSenha()));
-		funcionarioNovoDto.setSenhaConfirmacao(criptografiaService.encriptar(funcionarioNovoDto.getSenhaConfirmacao()));
-
-		return funcionarioNovoDto;
-	}
+	private UsuarioService usuarioService;
 	
 	
 	
 	public Boolean salvar(FuncionarioNovoDto entidade) {
 		SalvarCatchupInterface<FuncionarioNovoDto, Integer, FuncionarioRepositorio> crud = new CrudImplementacaoFuncionarioNovo();
-		return crud.salvar(trataDados(entidade), funcionarioRepositorio);
+		return crud.salvar(entidade, funcionarioRepositorio);
 	}
 
 	
@@ -57,5 +51,11 @@ public class FuncionarioService{
 		return crud.listarTodos(funcionarioRepositorio);
 	}
 	
+	public Boolean alterarSenha(FuncionarioEditarSenhaDto entidade, String cpf) {
+		Usuario funcionario = (Usuario) usuarioService.pesquisaUsuario(cpf);
+		entidade.setId(funcionario.getId());
+		EditarCatchupInterface<FuncionarioEditarSenhaDto, Integer, FuncionarioRepositorio> crud = new EditarSenhaFuncionarioImplementacao();
+		return crud.editar(entidade, funcionarioRepositorio);
+	}
 
 }

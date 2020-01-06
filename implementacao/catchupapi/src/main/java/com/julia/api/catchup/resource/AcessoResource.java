@@ -21,7 +21,7 @@ import com.julia.api.catchup.dominio.dto.TokenDto;
 import com.julia.api.catchup.excessao.RecursoNaoEncontradoException;
 import com.julia.api.catchup.seguranca.AutenticacaoService;
 import com.julia.api.catchup.service.TokenService;
-
+import javax.servlet.http.HttpSession;
 
 @RestController
 public class AcessoResource {
@@ -37,13 +37,14 @@ public class AcessoResource {
 	
 	
 		@RequestMapping(value = "/acesso", method = RequestMethod.POST)
-		public ResponseEntity<String> acesso(@RequestBody @Valid AcessoDto acesso) {
+		public ResponseEntity<String> acesso(@RequestBody @Valid AcessoDto acesso, HttpSession session) {
 			UsernamePasswordAuthenticationToken permissaoAcesso = autenticacaoService.autentificacaoUsuario(acesso);
 		
 			try {
 				Authentication authentication = authManager.authenticate(permissaoAcesso);
 				String token = tokenService.getToken(authentication);
 				TokenDto dto = new TokenDto(token, "Bearer");
+				session.setAttribute("cpf", acesso.getCpf());
 				return ResponseEntity.ok(dto.toString());
 				
 			}catch (DisabledException e) {
