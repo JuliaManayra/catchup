@@ -1,6 +1,6 @@
 package com.julia.api.catchup.dominio.dto;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,7 +16,7 @@ public class FuncionarioNovoDto {
 	private String senha;
 	private String senhaConfirmacao;
 	private String emailRecupercao;
-	private Integer perfil;
+	private Integer idPerfil;
 	private String emailRecuperacao;
 	
 	private String filial;
@@ -32,23 +32,28 @@ public class FuncionarioNovoDto {
 		
 	}
 
-	public FuncionarioNovoDto(String nome, String senha, String senhaConfirmacao, String emailRecupercao, Integer perfil,
+	public FuncionarioNovoDto(String nome, String senha, String senhaConfirmacao, String emailRecupercao, Integer idPerfil,
 			@CPF String cpf) {
 		super();
 		this.nome = nome;
 		this.senha = senha;
 		this.senhaConfirmacao = senhaConfirmacao;
 		this.emailRecupercao = emailRecupercao;
-		this.perfil = perfil;
+		this.idPerfil = idPerfil;
 		this.cpf = mascaraCpf(cpf);
 	}
 
-	public Integer getPerfil() {
-		return perfil;
+	
+	
+	
+	
+
+	public Integer getIdPerfil() {
+		return idPerfil;
 	}
 
-	public void setPerfil(Integer perfil) {
-		this.perfil = perfil;
+	public void setIdPerfil(Integer idPerfil) {
+		this.idPerfil = idPerfil;
 	}
 
 	public String getNome() {

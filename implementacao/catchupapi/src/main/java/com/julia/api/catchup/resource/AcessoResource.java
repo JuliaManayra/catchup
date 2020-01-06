@@ -24,7 +24,7 @@ import com.julia.api.catchup.service.TokenService;
 
 
 @RestController
-public class AcessoResources {
+public class AcessoResource {
 
 	@Autowired
 	private AuthenticationManager authManager;
@@ -58,7 +58,6 @@ public class AcessoResources {
 			catch (AuthenticationException e) {
 				return ResponseEntity.badRequest().build();
 			}
-//		
 		
 		}
 	

@@ -15,12 +15,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 
+import com.julia.api.catchup.seguranca.web.CatchUpAutenticacaoEntryPoint;
 import com.julia.api.catchup.seguranca.web.MinhaSolicitacaoAutenticadaSuccessHandler;
 import com.julia.api.catchup.seguranca.web.error.CatchUpAcessoNegadoHandler;
 import com.julia.api.catchup.seguranca.web.error.FalhaAutenticacaoHandler;
-import com.julia.api.catchup.seguranca.web.CatchUpAutenticacaoEntryPoint;
 import com.julia.api.catchup.service.TokenService;
 import com.julia.api.catchup.service.UsuarioService;
 
@@ -51,8 +50,6 @@ public class ConfiguracaoSeguranca extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private AuthenticationProviderService authenticationProviderService;
 
-//	@Autowired
-//	private FalhaAutenticacaoHandler falhaHandler = FalhaAutenticacaoHandler();
 	
 	@Override
 	@Bean
@@ -77,8 +74,9 @@ public class ConfiguracaoSeguranca extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
 		.antMatchers(HttpMethod.GET, "/topicos").permitAll()
 		.antMatchers(HttpMethod.GET, "/topicos/*").permitAll()
-		.antMatchers(HttpMethod.POST, "/acesso")
-		.permitAll().antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
+		.antMatchers(HttpMethod.POST, "/acesso").permitAll()
+		.antMatchers(HttpMethod.GET, "/usuario/**").hasAnyRole("ADMINISTRADOR","COLABORADOR")
+		.antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
 		.anyRequest().authenticated()
 		.and()
         .formLogin()

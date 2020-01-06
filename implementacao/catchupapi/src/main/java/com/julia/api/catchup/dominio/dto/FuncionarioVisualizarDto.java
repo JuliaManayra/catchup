@@ -1,23 +1,25 @@
 package com.julia.api.catchup.dominio.dto;
 
-import java.sql.Date;
+
+
+import java.util.Date;
 
 import org.hibernate.validator.constraints.br.CPF;
 
-import com.julia.api.catchup.dominio.validacao.Senha;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-@Senha
+
 public class FuncionarioVisualizarDto {
 	
 	private String nome;
 
-	private String emailRecupercao;
-	private Integer perfil;
+	private Integer idPerfil;
 	
 	private String emailRecuperacao;
 	
 	private String filial;
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	private Date nascimento;
 	
 	
@@ -31,12 +33,11 @@ public class FuncionarioVisualizarDto {
 
 	
 
-	public FuncionarioVisualizarDto(String nome, String emailRecupercao, Integer perfil, String emailRecuperacao,
+	public FuncionarioVisualizarDto(String nome, Integer idPerfil, String emailRecuperacao,
 			String filial, Date nascimento, @CPF String cpf) {
 		super();
 		this.nome = nome;
-		this.emailRecupercao = emailRecupercao;
-		this.perfil = perfil;
+		this.idPerfil = idPerfil;
 		this.emailRecuperacao = emailRecuperacao;
 		this.filial = filial;
 		this.nascimento = nascimento;
@@ -45,13 +46,19 @@ public class FuncionarioVisualizarDto {
 
 
 
-	public Integer getPerfil() {
-		return perfil;
+
+
+	public Integer getIdPerfil() {
+		return idPerfil;
 	}
 
-	public void setPerfil(Integer perfil) {
-		this.perfil = perfil;
+
+
+	public void setIdPerfil(Integer idPerfil) {
+		this.idPerfil = idPerfil;
 	}
+
+
 
 	public String getNome() {
 		return nome;
@@ -63,13 +70,6 @@ public class FuncionarioVisualizarDto {
 
 	
 
-	public String getEmailRecupercao() {
-		return emailRecupercao;
-	}
-
-	public void setEmailRecupercao(String emailRecupercao) {
-		this.emailRecupercao = emailRecupercao;
-	}
 
 	public String getCpf() {
 		return cpf;
