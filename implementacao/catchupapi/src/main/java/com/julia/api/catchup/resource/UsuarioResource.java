@@ -9,10 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.julia.api.catchup.dominio.dto.FuncionarioEditarDto;
 import com.julia.api.catchup.dominio.dto.FuncionarioNovoDto;
 import com.julia.api.catchup.dominio.dto.FuncionarioVisualizarDto;
 import com.julia.api.catchup.service.FuncionarioService;
@@ -40,7 +42,7 @@ public class UsuarioResource {
 	@PostMapping(value = "/novo")
 	public ResponseEntity<String> salvarNovo(@RequestBody @Valid  FuncionarioNovoDto funcionarioNovo) {
 		try {
-			Boolean dto = funcionarioService.salvarNovoFuncionario(funcionarioNovo);
+			 funcionarioService.salvar(funcionarioNovo);
 			return ResponseEntity.ok("Cadastrado com Sucesso!");
 		}catch(DataIntegrityViolationException e) {
 			 String erro = e.getRootCause().getMessage();
@@ -52,4 +54,21 @@ public class UsuarioResource {
 			return new ResponseEntity<>("false", null, HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	@PutMapping(value = "/editar")
+	public ResponseEntity<String> salvarEditar(@RequestBody @Valid  FuncionarioEditarDto funcionarioNovo) {
+		try {
+			 funcionarioService.editar(funcionarioNovo);
+			return ResponseEntity.ok("Cadastrado com Sucesso!");
+		}catch(DataIntegrityViolationException e) {
+			 String erro = e.getRootCause().getMessage();
+			 String[] er= erro.split("=");
+			 String resultado = er[1];
+			 resultado = resultado.replaceAll("already exists", "ja cadastrado");
+			return new ResponseEntity<>(resultado, null, HttpStatus.CONFLICT);
+		}catch (Exception e) {
+			return new ResponseEntity<>("false", null, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 }

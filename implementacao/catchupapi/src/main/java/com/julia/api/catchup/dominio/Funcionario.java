@@ -15,8 +15,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 
 import org.hibernate.validator.constraints.br.CPF;
@@ -36,6 +34,7 @@ public class Funcionario implements Serializable{
 	
 	@CPF
 	@Column(unique = true)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "000.000.000-00")
 	private String cpf;
 	
 	@Email
