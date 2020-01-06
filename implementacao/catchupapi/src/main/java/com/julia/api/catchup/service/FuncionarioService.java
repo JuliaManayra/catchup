@@ -24,6 +24,9 @@ public class FuncionarioService {
 	private FuncionarioRepositorio funcionarioRepositorio;
 	
 	
+	
+	@Autowired
+	private  CriptografiaService criptografiaService;
 
 	
 	public FuncionarioVisualizarDto visualisarFuncionarioId(Integer id) {
@@ -67,14 +70,22 @@ public class FuncionarioService {
 	}
 	
 	public Boolean salvarNovoFuncionario(FuncionarioNovoDto funcionarioNovoDto) {
-		
-		Funcionario funcionario = funcionarioNovoDtoParaFuncionario(funcionarioNovoDto);
-		funcionarioRepositorio.save(funcionario);
+		Funcionario funcionario = trataDadosFuncionario(funcionarioNovoDto);
+		funcionarioRepositorio.saveAndFlush(funcionario);
 		
 		if(funcionario.getId()!=null) {
 			return true;
 		}
 		return false;
 		
+	}
+	
+	
+	private Funcionario trataDadosFuncionario(FuncionarioNovoDto funcionarioNovoDto) {
+		
+		funcionarioNovoDto.setSenha(criptografiaService.encriptar(funcionarioNovoDto.getSenha()));
+		funcionarioNovoDto.setSenhaConfirmacao(criptografiaService.encriptar(funcionarioNovoDto.getSenhaConfirmacao()));
+		
+		return funcionarioNovoDtoParaFuncionario(funcionarioNovoDto);
 	}
 }

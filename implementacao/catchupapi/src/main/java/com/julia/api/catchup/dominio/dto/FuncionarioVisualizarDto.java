@@ -4,6 +4,8 @@ package com.julia.api.catchup.dominio.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.Email;
+
 import org.hibernate.validator.constraints.br.CPF;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -15,6 +17,8 @@ public class FuncionarioVisualizarDto {
 
 	private Integer idPerfil;
 	
+	@Email
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "email@email")
 	private String emailRecuperacao;
 	
 	private String filial;
@@ -24,6 +28,7 @@ public class FuncionarioVisualizarDto {
 	
 	
 	@CPF
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "000.000.000-00")
 	private String cpf;
 	
 	

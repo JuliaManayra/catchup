@@ -3,6 +3,7 @@ package com.julia.api.catchup.resource;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,12 +38,18 @@ public class UsuarioResource {
 	
 	
 	@PostMapping(value = "/novo")
-	public ResponseEntity<Boolean> salvarNovo(@RequestBody @Valid  FuncionarioNovoDto funcionarioNovo) {
+	public ResponseEntity<String> salvarNovo(@RequestBody @Valid  FuncionarioNovoDto funcionarioNovo) {
 		try {
 			Boolean dto = funcionarioService.salvarNovoFuncionario(funcionarioNovo);
-			return ResponseEntity.ok(dto);
+			return ResponseEntity.ok("Cadastrado com Sucesso!");
+		}catch(DataIntegrityViolationException e) {
+			 String erro = e.getRootCause().getMessage();
+			 String[] er= erro.split("=");
+			 String resultado = er[1];
+			 resultado = resultado.replaceAll("already exists", "ja cadastrado");
+			return new ResponseEntity<>(resultado, null, HttpStatus.CONFLICT);
 		}catch (Exception e) {
-			return new ResponseEntity<>(false, null, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("false", null, HttpStatus.BAD_REQUEST);
 		}
 	}
 }

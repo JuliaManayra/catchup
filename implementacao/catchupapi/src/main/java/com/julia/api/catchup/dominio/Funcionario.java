@@ -15,9 +15,13 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Email;
 
 import org.hibernate.validator.constraints.br.CPF;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -29,10 +33,13 @@ public class Funcionario implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	
 	@CPF
 	@Column(unique = true)
 	private String cpf;
 	
+	@Email
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "email@email")
 	private String emailRecuperacao;
 	
 	@JsonIgnore

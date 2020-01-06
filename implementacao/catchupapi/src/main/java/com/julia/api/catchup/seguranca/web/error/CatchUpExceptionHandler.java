@@ -7,6 +7,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
 import org.springframework.beans.TypeMismatchException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -168,4 +169,6 @@ public class CatchUpExceptionHandler extends ResponseEntityExceptionHandler {
         final StatusErro statusErro = new StatusErro(HttpStatus.INTERNAL_SERVER_ERROR, ex.getLocalizedMessage(), "ocorreu um erro interno");
         return new ResponseEntity<Object>(statusErro, new HttpHeaders(), statusErro.getStatus());
     }
+    
+    
 }

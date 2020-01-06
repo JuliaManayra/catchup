@@ -14,6 +14,12 @@ public class SenhaValidacao implements ConstraintValidator<Senha, FuncionarioNov
 	@Override
 	public boolean isValid(FuncionarioNovoDto value, ConstraintValidatorContext context) {
 		List<FieldMessage> list = new ArrayList<>();		
+		if(value.getSenhaConfirmacao().trim().isEmpty()) {
+			list.add(new FieldMessage("senha"," senha de confirmação vazia"));
+		}
+		if(value.getSenha().trim().isEmpty()) {
+			list.add(new FieldMessage("senha"," senha vazia"));
+		}
 		if(!value.getSenha().equals(value.getSenhaConfirmacao())) {
 			list.add(new FieldMessage("senha","Senha e senha de confirmação não conferem!"));
 		}

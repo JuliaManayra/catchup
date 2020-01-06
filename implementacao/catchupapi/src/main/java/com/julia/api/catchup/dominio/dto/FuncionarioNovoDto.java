@@ -4,25 +4,35 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.validation.constraints.Email;
+
 import org.hibernate.validator.constraints.br.CPF;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.julia.api.catchup.dominio.validacao.Senha;
 
 @Senha
 public class FuncionarioNovoDto {
-	
+	@JsonIgnore
+	private Integer id;
 	private String nome;
 	private String senha;
 	private String senhaConfirmacao;
-	private String emailRecupercao;
 	private Integer idPerfil;
+	
+	@Email
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "email@email")
 	private String emailRecuperacao;
 	
 	private String filial;
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	private Date nascimento;
+	
+	
 	@CPF
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "000.000.000-00")
 	private String cpf;
 	
 	@JsonIgnore
@@ -32,21 +42,29 @@ public class FuncionarioNovoDto {
 		
 	}
 
-	public FuncionarioNovoDto(String nome, String senha, String senhaConfirmacao, String emailRecupercao, Integer idPerfil,
+	public FuncionarioNovoDto(String nome, String senha, String senhaConfirmacao, Integer idPerfil,
 			@CPF String cpf) {
 		super();
 		this.nome = nome;
 		this.senha = senha;
 		this.senhaConfirmacao = senhaConfirmacao;
-		this.emailRecupercao = emailRecupercao;
 		this.idPerfil = idPerfil;
 		this.cpf = mascaraCpf(cpf);
+		this.id =null;
 	}
 
 	
 	
 	
 	
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public Integer getIdPerfil() {
 		return idPerfil;
@@ -80,13 +98,6 @@ public class FuncionarioNovoDto {
 		this.senhaConfirmacao = senhaConfirmacao;
 	}
 
-	public String getEmailRecupercao() {
-		return emailRecupercao;
-	}
-
-	public void setEmailRecupercao(String emailRecupercao) {
-		this.emailRecupercao = emailRecupercao;
-	}
 
 	public String getCpf() {
 		return cpf;
