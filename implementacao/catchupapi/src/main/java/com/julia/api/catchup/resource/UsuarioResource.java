@@ -96,4 +96,6 @@ public class UsuarioResource {
 			return new ResponseEntity<>(new ArrayList<>(), null, HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	
 }

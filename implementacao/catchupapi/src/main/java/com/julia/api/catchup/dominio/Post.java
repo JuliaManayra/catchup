@@ -31,7 +31,7 @@ public class Post implements Serializable{
 	
 	
 	@ManyToOne
-	@JoinColumn(name="fk_perfil")
+	@JoinColumn(name="fk_funcionario_criador")
 	private Funcionario funcionarioCriador;
 	
 	@ManyToMany(mappedBy = "listaPostsCurtidos")

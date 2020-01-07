@@ -1,5 +1,8 @@
 package com.julia.api.catchup.seguranca;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,5 +38,23 @@ public class AutenticacaoService  implements UserDetailsService {
 	
 	public UsernamePasswordAuthenticationToken autentificacaoUsuario(Usuario usuario) {
 		return new UsernamePasswordAuthenticationToken(usuario,null, usuario.getAuthorities());
+	}
+	
+	public String getCpfUsuarioLogado(String cpf) {
+		return mascaraCpf(cpf);
+	}
+	
+	private Boolean verificaCpf(String cpf ) {
+		Pattern pattern =  Pattern.compile("(^(\\d{3}.\\d{3}.\\d{3}-\\d{2}))");
+		Matcher matcher = pattern.matcher(cpf);
+		return matcher.matches();
+	}
+	
+	private String mascaraCpf(String cpf) {
+		
+		 if (verificaCpf(cpf)==false && cpf.length()==11) {
+			 return cpf.substring(0,3)+"."+cpf.substring(3,6)+"."+cpf.substring(6,9)+"-"+cpf.substring(9,11);
+		 }
+		return cpf;
 	}
 }

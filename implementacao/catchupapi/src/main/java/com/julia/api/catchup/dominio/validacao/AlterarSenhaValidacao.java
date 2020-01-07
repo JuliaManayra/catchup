@@ -7,7 +7,6 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import com.julia.api.catchup.dominio.dto.FuncionarioEditarSenhaDto;
-import com.julia.api.catchup.dominio.dto.FuncionarioNovoDto;
 import com.julia.api.catchup.excessao.dto.FieldMessage;
 
 public class AlterarSenhaValidacao implements ConstraintValidator<Senha, FuncionarioEditarSenhaDto> {

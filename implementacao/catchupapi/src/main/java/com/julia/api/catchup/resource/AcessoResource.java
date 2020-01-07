@@ -44,7 +44,7 @@ public class AcessoResource {
 				Authentication authentication = authManager.authenticate(permissaoAcesso);
 				String token = tokenService.getToken(authentication);
 				TokenDto dto = new TokenDto(token, "Bearer");
-				session.setAttribute("cpf", acesso.getCpf());
+				session.setAttribute("cpf", autenticacaoService.getCpfUsuarioLogado(acesso.getCpf()));
 				return ResponseEntity.ok(dto.toString());
 				
 			}catch (DisabledException e) {

@@ -47,8 +47,8 @@ public class FuncionarioNovoDto {
 			@CPF String cpf) {
 		super();
 		this.nome = nome;
-		this.senha = BCrypt.hashpw(senha, BCrypt.gensalt());
-		this.senhaConfirmacao = BCrypt.hashpw(senhaConfirmacao, BCrypt.gensalt());
+		this.senha = senha;
+		this.senhaConfirmacao = senhaConfirmacao;
 		this.idPerfil = idPerfil;
 		this.cpf = mascaraCpf(cpf);
 		this.id =null;
@@ -88,7 +88,7 @@ public class FuncionarioNovoDto {
 	}
 
 	public void setSenha(String senha) {
-		this.senha =  BCrypt.hashpw(senha, BCrypt.gensalt());;
+		this.senha = senha;
 	}
 
 	public String getSenhaConfirmacao() {
@@ -96,7 +96,7 @@ public class FuncionarioNovoDto {
 	}
 
 	public void setSenhaConfirmacao(String senhaConfirmacao) {
-		this.senhaConfirmacao =  BCrypt.hashpw(senhaConfirmacao, BCrypt.gensalt());
+		this.senhaConfirmacao =senhaConfirmacao;
 	}
 
 

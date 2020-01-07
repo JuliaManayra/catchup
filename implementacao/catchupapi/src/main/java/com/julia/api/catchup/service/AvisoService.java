@@ -12,10 +12,12 @@ import com.julia.api.catchup.dominio.Aviso;
 import com.julia.api.catchup.dominio.dto.AvisoEditarDto;
 import com.julia.api.catchup.dominio.dto.AvisoNovoDto;
 import com.julia.api.catchup.dominio.dto.AvisoVisualizarDto;
+import com.julia.api.catchup.dominio.view.Usuario;
 import com.julia.api.catchup.excessao.SemPermissaoEditarAvisoException;
 import com.julia.api.catchup.implementacao.EditarAvisoImplementacao;
 import com.julia.api.catchup.implementacao.SalvarAvisoNovoImplementacao;
 import com.julia.api.catchup.implementacao.VisualizarAvisoImplementacao;
+import com.julia.api.catchup.implementacao.VisualizarAvisoPorParametroImplementacao;
 import com.julia.api.catchup.interfaces.EditarCatchupInterface;
 import com.julia.api.catchup.interfaces.SalvarCatchupInterface;
 import com.julia.api.catchup.repositorio.AvisoRepositorio;
@@ -26,12 +28,22 @@ public class AvisoService{
 	@Autowired
 	private AvisoRepositorio avisoRepositorio;
 	
-
+	@Autowired
+	private UsuarioService usuarioService;
 	
 	
-	public Boolean salvar(AvisoNovoDto entidade) {
+	public Boolean salvar(AvisoNovoDto entidade,HttpSession session) {
+		
 		SalvarCatchupInterface<AvisoNovoDto, Integer, AvisoRepositorio> crud = new SalvarAvisoNovoImplementacao();
-		return crud.salvar(entidade, avisoRepositorio);
+		return crud.salvar(setUsuarioSessao(entidade, session), avisoRepositorio);
+	}
+
+
+	private AvisoNovoDto setUsuarioSessao(AvisoNovoDto entidade, HttpSession session) {
+		String cpf = (String) session.getAttribute("cpf");
+		Usuario usuario =(Usuario) usuarioService.pesquisaUsuario(cpf);
+		entidade.setIdFuncionario(usuario.getId());
+		return entidade;
 	}
 
 	
@@ -49,7 +61,7 @@ public class AvisoService{
 		Optional<Aviso> avisoOptional = avisoRepositorio.findById(entidade.getId());
 		if(avisoOptional.isPresent()) {
 			Aviso aviso = avisoOptional.get();
-			if(aviso.getFuncionarioCriador()!=null && aviso.getFuncionarioCriador().getCpf().equals(cpf)) {
+			if(aviso.getFuncionario()!=null && aviso.getFuncionario().getCpf().equals(cpf)) {
 				return true;
 			}
 		}
@@ -68,4 +80,10 @@ public class AvisoService{
 	}
 	
 
+	public List<AvisoVisualizarDto> listarTodosMeusAvisos(HttpSession session) {
+		String cpf = (String) session.getAttribute("cpf");
+		VisualizarAvisoPorParametroImplementacao crud = new VisualizarAvisoPorParametroImplementacao();
+		return crud.listarTodos(cpf,avisoRepositorio);
+	}
+	
 }

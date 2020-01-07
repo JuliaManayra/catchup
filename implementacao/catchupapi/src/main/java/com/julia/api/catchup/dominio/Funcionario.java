@@ -18,7 +18,6 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 
 import org.hibernate.validator.constraints.br.CPF;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -31,6 +30,7 @@ public class Funcionario implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	private String nome;
 	
 	@CPF
@@ -57,11 +57,11 @@ public class Funcionario implements Serializable{
 	private Perfil perfil;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="funcionarioCriador", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="funcionario", cascade=CascadeType.ALL)
 	private List<Aviso> listaAvisos;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="funcionarioCriador", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="funcionario", cascade=CascadeType.ALL)
 	private List<Parceria> listaParcerias;
 	
 	@JsonIgnore

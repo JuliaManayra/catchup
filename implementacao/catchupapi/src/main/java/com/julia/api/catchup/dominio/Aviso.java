@@ -29,8 +29,8 @@ public class Aviso implements Serializable{
 	
 	
 	@ManyToOne
-	@JoinColumn(name="fk_perfil")
-	private Funcionario funcionarioCriador;
+	@JoinColumn(name="fk_funcionario_criador")
+	private Funcionario funcionario;
 
 
 	public Integer getId() {
@@ -83,13 +83,16 @@ public class Aviso implements Serializable{
 	}
 
 
-	public Funcionario getFuncionarioCriador() {
-		return funcionarioCriador;
+	
+
+
+	public Funcionario getFuncionario() {
+		return funcionario;
 	}
 
 
-	public void setFuncionarioCriador(Funcionario funcionarioCriador) {
-		this.funcionarioCriador = funcionarioCriador;
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
 	}
 
 

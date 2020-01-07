@@ -2,6 +2,8 @@ package com.julia.api.catchup.implementacao;
 
 import java.util.Optional;
 
+import org.springframework.security.crypto.bcrypt.BCrypt;
+
 import com.julia.api.catchup.dominio.Funcionario;
 import com.julia.api.catchup.dominio.dto.FuncionarioEditarSenhaDto;
 import com.julia.api.catchup.interfaces.EditarCatchupInterface;
@@ -19,6 +21,9 @@ public class EditarSenhaFuncionarioImplementacao implements EditarCatchupInterfa
 		Optional<Funcionario> funcionarioAntigoOptional = element.findById(funcionario.getId());
 		if(funcionarioAntigoOptional.isPresent()) {
 			Funcionario atualizado= funcionarioAntigoOptional.get();
+			String encript = BCrypt.hashpw(funcionario.getSenha(), BCrypt.gensalt());
+			funcionario.setSenha(encript);
+			funcionario.setSenhaConfirmacao(encript);
 			atualizado.setSenha(funcionario.getSenha());
 			atualizado.setSenhaConfirmacao(funcionario.getSenhaConfirmacao());
 			element.saveAndFlush(atualizado);

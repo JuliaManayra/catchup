@@ -8,25 +8,27 @@ public class AvisoNovoDto {
 
 	@JsonIgnore
 	private Integer id;
+	@JsonIgnore
 	private Date data;
+	
 	private String imagem;
 	
 	private String titulo;
 	
 	private String descricao;
 	
-	private Integer idFuncionarioCriador;
+	@JsonIgnore
+	private Integer idFuncionario;
 
 	
 	
 	
-	public AvisoNovoDto(Date data, String imagem, String titulo, String descricao, Integer idFuncionarioCriador) {
+	public AvisoNovoDto(String imagem, String titulo, String descricao) {
 		super();
-		this.data = data;
+		this.data = new Date();
 		this.imagem = imagem;
 		this.titulo = titulo;
 		this.descricao = descricao;
-		this.idFuncionarioCriador = idFuncionarioCriador;
 		this.id = null;
 	}
 
@@ -70,13 +72,17 @@ public class AvisoNovoDto {
 		this.descricao = descricao;
 	}
 
-	public Integer getIdFuncionarioCriador() {
-		return idFuncionarioCriador;
+	public Integer getIdFuncionario() {
+		return idFuncionario;
 	}
 
-	public void setIdFuncionarioCriador(Integer idFuncionarioCriador) {
-		this.idFuncionarioCriador = idFuncionarioCriador;
+	public void setIdFuncionario(Integer idFuncionario) {
+		this.idFuncionario = idFuncionario;
 	}
+
+	
+
+	
 	
 	
 	

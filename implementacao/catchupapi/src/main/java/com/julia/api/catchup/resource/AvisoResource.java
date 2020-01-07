@@ -46,9 +46,9 @@ public class AvisoResource {
 	
 	
 	@PostMapping(value = "/novo")
-	public ResponseEntity<String> salvarNovo(@RequestBody @Valid  AvisoNovoDto AvisoNovo) {
+	public ResponseEntity<String> salvarNovo(@RequestBody @Valid  AvisoNovoDto AvisoNovo, HttpSession session) {
 		try {
-			avisoService.salvar(AvisoNovo);
+			avisoService.salvar(AvisoNovo,session);
 			return ResponseEntity.ok("Cadastrado com Sucesso!");
 		}catch (Exception e) {
 			return new ResponseEntity<>("false", null, HttpStatus.BAD_REQUEST);
@@ -68,13 +68,20 @@ public class AvisoResource {
 	}
 	
 	
-	
-	
-	
 	@GetMapping(value = "/todos")
 	public ResponseEntity<List<AvisoVisualizarDto>> todosAvisos() {
 		try {
 			List<AvisoVisualizarDto> dto = avisoService.listarTodosAvisos();
+			return ResponseEntity.ok(dto);
+		}catch (Exception e) {
+			return new ResponseEntity<>(new ArrayList<>(), null, HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@GetMapping(value = "/meus")
+	public ResponseEntity<List<AvisoVisualizarDto>> todosMeusAvisos( HttpSession session) {
+		try {
+			List<AvisoVisualizarDto> dto = avisoService.listarTodosMeusAvisos(session);
 			return ResponseEntity.ok(dto);
 		}catch (Exception e) {
 			return new ResponseEntity<>(new ArrayList<>(), null, HttpStatus.NOT_FOUND);

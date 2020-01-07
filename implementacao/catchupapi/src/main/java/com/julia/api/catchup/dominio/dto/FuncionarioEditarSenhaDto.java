@@ -23,14 +23,14 @@ public class FuncionarioEditarSenhaDto {
 	
 	public FuncionarioEditarSenhaDto(String senha, String senhaConfirmacao) {
 		super();
-		this.senha = BCrypt.hashpw(senha, BCrypt.gensalt());
-		this.senhaConfirmacao = BCrypt.hashpw(senhaConfirmacao, BCrypt.gensalt());
+		this.senha = senha;
+		this.senhaConfirmacao = senhaConfirmacao;
 	}
 	public String getSenha() {
 		return senha;
 	}
 	public void setSenha(String senha) {
-		this.senha =  BCrypt.hashpw(senha, BCrypt.gensalt());
+		this.senha = senha;
 	}
 	
 	
@@ -38,7 +38,7 @@ public class FuncionarioEditarSenhaDto {
 		return senhaConfirmacao;
 	}
 	public void setSenhaConfirmacao(String senhaConfirmacao) {
-		this.senhaConfirmacao =  BCrypt.hashpw(senhaConfirmacao, BCrypt.gensalt());;
+		this.senhaConfirmacao =  senhaConfirmacao;
 	}
 	
 	

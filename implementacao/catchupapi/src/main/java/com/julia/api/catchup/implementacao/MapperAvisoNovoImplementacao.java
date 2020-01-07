@@ -19,10 +19,10 @@ public class MapperAvisoNovoImplementacao implements MapperCatchupInterface<Avis
 	@Override
 	public Aviso dtoParaEntidade(AvisoNovoDto element) {
 		ModelMapper modelMapper = new ModelMapper();
-		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE)
-				.setFieldAccessLevel(AccessLevel.PRIVATE).setFieldMatchingEnabled(true);
-
-		return modelMapper.map(element, Aviso.class);
+		modelMapper.getConfiguration().setFieldMatchingEnabled(true)
+				.setFieldAccessLevel(AccessLevel.PRIVATE);
+		
+		return modelMapper.map(element, Aviso.class); 	
 	}
 
 

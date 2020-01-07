@@ -2,6 +2,7 @@ package com.julia.api.catchup.dominio.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class AvisoVisualizarDto {
@@ -9,7 +10,9 @@ public class AvisoVisualizarDto {
 	@JsonIgnore
 	private Integer id;
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	private Date data;
+	
 	private String imagem;
 	
 	private String titulo;

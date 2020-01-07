@@ -2,10 +2,15 @@ package com.julia.api.catchup.dominio.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class AvisoEditarDto {
 
 	private Integer id;
+	
+	@JsonIgnore
 	private Date data;
+	
 	private String imagem;
 	
 	private String titulo;
@@ -14,9 +19,8 @@ public class AvisoEditarDto {
 	
 	
 	
-	public AvisoEditarDto(Integer id, Date data, String imagem, String titulo, String descricao) {
+	public AvisoEditarDto(Integer id, String imagem, String titulo, String descricao) {
 		super();
-		this.data = data;
 		this.imagem = imagem;
 		this.titulo = titulo;
 		this.descricao = descricao;

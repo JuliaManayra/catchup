@@ -12,6 +12,7 @@ public class SalvarAvisoNovoImplementacao implements   SalvarCatchupInterface<Av
 	public Boolean salvar(AvisoNovoDto entidade, AvisoRepositorio repositorio) {
 		MapperCatchupInterface<AvisoNovoDto, Aviso> mapper= new MapperAvisoNovoImplementacao();
 		Aviso aviso = mapper.dtoParaEntidade(entidade);
+		
 		repositorio.saveAndFlush(aviso);
 
 		if (aviso.getId() != null) {
