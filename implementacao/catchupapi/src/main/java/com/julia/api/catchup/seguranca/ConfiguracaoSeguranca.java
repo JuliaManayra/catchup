@@ -75,9 +75,11 @@ public class ConfiguracaoSeguranca extends WebSecurityConfigurerAdapter {
 		.antMatchers(HttpMethod.GET, "/topicos").permitAll()
 		.antMatchers(HttpMethod.GET, "/topicos/*").permitAll()
 		.antMatchers(HttpMethod.POST, "/acesso").permitAll()
-		.antMatchers(HttpMethod.GET, "/usuario/**").hasAnyRole("ADMINISTRADOR","COLABORADOR")
+		.antMatchers(HttpMethod.GET, "/usuario/pesquisar/**").hasAnyRole("ADMINISTRADOR","COLABORADOR")
 		.antMatchers(HttpMethod.POST, "/usuario/salvar").hasRole("ADMINISTRADOR")
 		.antMatchers(HttpMethod.PUT, "/usuario/editar").hasRole("ADMINISTRADOR")
+		.antMatchers(HttpMethod.GET, "/usuario/todos").hasRole("ADMINISTRADOR")
+		.antMatchers(HttpMethod.PUT, "/alterarSenha").hasAnyRole("ADMINISTRADOR","COLABORADOR")
 		.antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
 		.anyRequest().authenticated()
 		.and()
@@ -100,4 +102,5 @@ public class ConfiguracaoSeguranca extends WebSecurityConfigurerAdapter {
 	 public FalhaAutenticacaoHandler FalhaAutenticacaoHandler() {
 	        return new FalhaAutenticacaoHandler();
 	 }
+	 
 }

@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 
@@ -33,7 +37,7 @@ public class UsuarioResource {
 	
 
 	
-	@GetMapping(value = "/{id}")
+	@GetMapping(value = "/pesquisar/{id}")
 	public ResponseEntity<FuncionarioVisualizarDto> pesquisarId(@PathVariable Integer id) {
 		try {
 			FuncionarioVisualizarDto dto = funcionarioService.visualisarFuncionarioId(id);
@@ -74,11 +78,22 @@ public class UsuarioResource {
 	@PutMapping(value = "/alterarSenha")
 	public ResponseEntity<String> alterarSenha(@RequestBody @Valid  FuncionarioEditarSenhaDto funcionarioNovo, HttpSession session) {
 		try {
-			 String cpf = (String) session.getAttribute("cpf");
-			 funcionarioService.alterarSenha(funcionarioNovo,cpf);
+			
+			 funcionarioService.alterarSenha(funcionarioNovo,session);
 			return ResponseEntity.ok("Senha alterada com Sucesso!");
 		}catch (Exception e) {
 			return new ResponseEntity<>("false", null, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	
+	@GetMapping(value = "/todos")
+	public ResponseEntity<List<FuncionarioVisualizarDto>> todosFuncionarios() {
+		try {
+			List<FuncionarioVisualizarDto> dto = funcionarioService.listarTodosFuncionarios();
+			return ResponseEntity.ok(dto);
+		}catch (Exception e) {
+			return new ResponseEntity<>(new ArrayList<>(), null, HttpStatus.NOT_FOUND);
 		}
 	}
 }

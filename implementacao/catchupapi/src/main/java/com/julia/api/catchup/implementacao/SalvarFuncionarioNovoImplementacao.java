@@ -6,7 +6,7 @@ import com.julia.api.catchup.interfaces.MapperCatchupInterface;
 import com.julia.api.catchup.interfaces.SalvarCatchupInterface;
 import com.julia.api.catchup.repositorio.FuncionarioRepositorio;
 
-public class CrudImplementacaoFuncionarioNovo implements   SalvarCatchupInterface<FuncionarioNovoDto, Integer,FuncionarioRepositorio>{
+public class SalvarFuncionarioNovoImplementacao implements   SalvarCatchupInterface<FuncionarioNovoDto, Integer,FuncionarioRepositorio>{
 
 	@Override
 	public Boolean salvar(FuncionarioNovoDto entidade, FuncionarioRepositorio repositorio) {

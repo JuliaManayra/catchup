@@ -2,6 +2,8 @@ package com.julia.api.catchup.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +12,7 @@ import com.julia.api.catchup.dominio.dto.FuncionarioEditarSenhaDto;
 import com.julia.api.catchup.dominio.dto.FuncionarioNovoDto;
 import com.julia.api.catchup.dominio.dto.FuncionarioVisualizarDto;
 import com.julia.api.catchup.dominio.view.Usuario;
-import com.julia.api.catchup.implementacao.CrudImplementacaoFuncionarioNovo;
+import com.julia.api.catchup.implementacao.SalvarFuncionarioNovoImplementacao;
 import com.julia.api.catchup.implementacao.EditarFuncionarioImplementacao;
 import com.julia.api.catchup.implementacao.EditarSenhaFuncionarioImplementacao;
 import com.julia.api.catchup.implementacao.VisualizarFuncionarioImplementacao;
@@ -31,7 +33,7 @@ public class FuncionarioService{
 	
 	
 	public Boolean salvar(FuncionarioNovoDto entidade) {
-		SalvarCatchupInterface<FuncionarioNovoDto, Integer, FuncionarioRepositorio> crud = new CrudImplementacaoFuncionarioNovo();
+		SalvarCatchupInterface<FuncionarioNovoDto, Integer, FuncionarioRepositorio> crud = new SalvarFuncionarioNovoImplementacao();
 		return crud.salvar(entidade, funcionarioRepositorio);
 	}
 
@@ -51,7 +53,8 @@ public class FuncionarioService{
 		return crud.listarTodos(funcionarioRepositorio);
 	}
 	
-	public Boolean alterarSenha(FuncionarioEditarSenhaDto entidade, String cpf) {
+	public Boolean alterarSenha(FuncionarioEditarSenhaDto entidade, HttpSession session) {
+		 String cpf = (String) session.getAttribute("cpf");
 		Usuario funcionario = (Usuario) usuarioService.pesquisaUsuario(cpf);
 		entidade.setId(funcionario.getId());
 		EditarCatchupInterface<FuncionarioEditarSenhaDto, Integer, FuncionarioRepositorio> crud = new EditarSenhaFuncionarioImplementacao();
