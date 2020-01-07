@@ -22,7 +22,9 @@ public class AvisoVisualizarDto {
 
 	
 	
-	
+	public AvisoVisualizarDto() {
+		
+	}
 	
 	public AvisoVisualizarDto(Integer id, Date data, String imagem, String titulo, String descricao,
 			String nomeFuncionarioCriador, String filialFuncionarioCriador) {

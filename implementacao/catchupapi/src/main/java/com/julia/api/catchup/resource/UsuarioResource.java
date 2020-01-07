@@ -68,7 +68,7 @@ public class UsuarioResource {
 	public ResponseEntity<String> salvarEditar(@RequestBody @Valid  FuncionarioEditarDto funcionarioNovo) {
 		try {
 			 funcionarioService.editar(funcionarioNovo);
-			return ResponseEntity.ok("Cadastrado com Sucesso!");
+			return ResponseEntity.ok("Editado com Sucesso!");
 		}catch (Exception e) {
 			return new ResponseEntity<>("false", null, HttpStatus.BAD_REQUEST);
 		}
