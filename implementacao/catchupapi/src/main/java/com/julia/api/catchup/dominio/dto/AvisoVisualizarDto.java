@@ -21,7 +21,6 @@ public class AvisoVisualizarDto {
 	private String filialFuncionarioCriador;
 
 	
-	
 	public AvisoVisualizarDto() {
 		
 	}
@@ -93,7 +92,7 @@ public class AvisoVisualizarDto {
 	public void setFilialFuncionarioCriador(String filialFuncionarioCriador) {
 		this.filialFuncionarioCriador = filialFuncionarioCriador;
 	}
-	
+
 	
 	
 }

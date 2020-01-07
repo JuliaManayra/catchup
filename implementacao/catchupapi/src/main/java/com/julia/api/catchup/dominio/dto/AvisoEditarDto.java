@@ -12,8 +12,6 @@ public class AvisoEditarDto {
 	
 	private String descricao;
 	
-
-	
 	
 	
 	public AvisoEditarDto(Integer id, Date data, String imagem, String titulo, String descricao) {
