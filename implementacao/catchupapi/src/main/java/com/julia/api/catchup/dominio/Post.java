@@ -32,7 +32,7 @@ public class Post implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="fk_funcionario_criador")
-	private Funcionario funcionarioCriador;
+	private Funcionario funcionario;
 	
 	@ManyToMany(mappedBy = "listaPostsCurtidos")
 	private List<Funcionario> listaFuncionariosCurtidores;
@@ -87,13 +87,15 @@ public class Post implements Serializable{
 	}
 
 
-	public Funcionario getFuncionarioCriador() {
-		return funcionarioCriador;
+	
+
+	public Funcionario getFuncionario() {
+		return funcionario;
 	}
 
 
-	public void setFuncionarioCriador(Funcionario funcionarioCriador) {
-		this.funcionarioCriador = funcionarioCriador;
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
 	}
 
 
