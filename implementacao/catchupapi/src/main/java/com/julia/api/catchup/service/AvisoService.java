@@ -58,10 +58,11 @@ public class AvisoService{
 
 	private Boolean verificaEdicao(AvisoEditarDto entidade, HttpSession session) {
 		String cpf = (String) session.getAttribute("cpf");
+		Usuario usuario =(Usuario) usuarioService.pesquisaUsuario(cpf);
 		Optional<Aviso> avisoOptional = avisoRepositorio.findById(entidade.getId());
 		if(avisoOptional.isPresent()) {
 			Aviso aviso = avisoOptional.get();
-			if(aviso.getFuncionario()!=null && aviso.getFuncionario().getCpf().equals(cpf)) {
+			if(aviso.getFuncionario()!=null && aviso.getFuncionario().getCpf().equals(cpf) || usuario.getAuthorities().stream().filter(a-> a.getAuthority().contains("ADMINISTRADOR")).count()>0 ) {
 				return true;
 			}
 		}

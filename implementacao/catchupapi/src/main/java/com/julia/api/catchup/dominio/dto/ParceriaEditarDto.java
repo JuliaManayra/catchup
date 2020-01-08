@@ -4,23 +4,33 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class AvisoEditarDto {
+public class ParceriaEditarDto {
 
+	@JsonIgnore
 	private Integer id;
 	
 	@JsonIgnore
 	private Date data;
-	
+
 	private String imagem;
-	
+
 	private String titulo;
-	
+
 	private String descricao;
-	
+
 	@JsonIgnore
 	private Integer idFuncionario;
+
+
+	private String telefone;
+
+	private String endereco;
+
+	private Integer idAreaAtuacao;
 	
-	public AvisoEditarDto(Integer id, String imagem, String titulo, String descricao) {
+	
+	
+	public ParceriaEditarDto(Integer id, String imagem, String titulo, String descricao) {
 		super();
 		this.imagem = imagem;
 		this.titulo = titulo;
@@ -74,6 +84,30 @@ public class AvisoEditarDto {
 
 	public void setIdFuncionario(Integer idFuncionario) {
 		this.idFuncionario = idFuncionario;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public Integer getIdAreaAtuacao() {
+		return idAreaAtuacao;
+	}
+
+	public void setIdAreaAtuacao(Integer idAreaAtuacao) {
+		this.idAreaAtuacao = idAreaAtuacao;
 	}
 
 	
