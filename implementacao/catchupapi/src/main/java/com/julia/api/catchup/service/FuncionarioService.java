@@ -12,9 +12,9 @@ import com.julia.api.catchup.dominio.dto.FuncionarioEditarSenhaDto;
 import com.julia.api.catchup.dominio.dto.FuncionarioNovoDto;
 import com.julia.api.catchup.dominio.dto.FuncionarioVisualizarDto;
 import com.julia.api.catchup.dominio.view.Usuario;
-import com.julia.api.catchup.implementacao.SalvarFuncionarioNovoImplementacao;
 import com.julia.api.catchup.implementacao.EditarFuncionarioImplementacao;
 import com.julia.api.catchup.implementacao.EditarSenhaFuncionarioImplementacao;
+import com.julia.api.catchup.implementacao.SalvarFuncionarioNovoImplementacao;
 import com.julia.api.catchup.implementacao.VisualizarFuncionarioImplementacao;
 import com.julia.api.catchup.interfaces.EditarCatchupInterface;
 import com.julia.api.catchup.interfaces.SalvarCatchupInterface;
@@ -61,4 +61,5 @@ public class FuncionarioService{
 		return crud.editar(entidade, funcionarioRepositorio);
 	}
 
+	
 }

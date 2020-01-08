@@ -1,7 +1,5 @@
 package com.julia.api.catchup.dominio.dto;
 
-import org.springframework.security.crypto.bcrypt.BCrypt;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class FuncionarioEditarSenhaDto {

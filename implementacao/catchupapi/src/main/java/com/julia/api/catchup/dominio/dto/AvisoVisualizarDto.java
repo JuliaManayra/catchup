@@ -10,7 +10,7 @@ public class AvisoVisualizarDto {
 	@JsonIgnore
 	private Integer id;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss",timezone="GMT-3")
 	private Date data;
 	
 	private String imagem;

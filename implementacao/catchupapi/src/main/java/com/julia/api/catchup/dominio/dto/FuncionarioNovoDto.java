@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 import javax.validation.constraints.Email;
 
 import org.hibernate.validator.constraints.br.CPF;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;

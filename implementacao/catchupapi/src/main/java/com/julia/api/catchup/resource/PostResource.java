@@ -69,12 +69,12 @@ public class PostResource {
 	}
 	
 	@PutMapping(value = "/curtir/{id}")
-	public ResponseEntity<String> salvarEditar(@PathVariable("id")  Integer id,  HttpSession session) {
+	public ResponseEntity<String> salvarCurtir(@PathVariable("id")  Integer id,  HttpSession session) {
 		try {
 			 String saida = postService.curtirPost(id, session);
 			return ResponseEntity.ok(saida +" com Sucesso!");
 		}catch (RecursoNaoEncontradoException e) {
-			return new ResponseEntity<>("Post nao encontrado", null, HttpStatus.FORBIDDEN);
+			return new ResponseEntity<>("Post nao encontrado", null, HttpStatus.NOT_FOUND);
 		}catch (Exception e) {
 			return new ResponseEntity<>("false", null, HttpStatus.BAD_REQUEST);
 		}

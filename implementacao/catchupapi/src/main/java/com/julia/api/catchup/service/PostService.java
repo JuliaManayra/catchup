@@ -31,9 +31,10 @@ public class PostService{
 
 	@Autowired
 	private PostRepositorio postRepositorio;
-	
+		
 	@Autowired
 	private UsuarioService usuarioService;
+	
 	
 	
 	public Boolean salvar(PostNovoDto entidade,HttpSession session) {
@@ -99,19 +100,23 @@ public class PostService{
 			
 			if(post.getListaFuncionariosCurtidores().stream().filter(f-> f.getCpf().equals(cpf)).count() == 0) 
 			{
-				Usuario usuario =(Usuario) usuarioService.pesquisaUsuario(cpf);
+				Usuario usuario = (Usuario) usuarioService.pesquisaUsuario(cpf);
+				
 				Funcionario funcionario = new Funcionario();
 				funcionario.setId(usuario.getId());
 				post.getListaFuncionariosCurtidores().add(funcionario);
-				postRepositorio.saveAndFlush(post);
+				
+				postRepositorio.save(post);
+				
 				return "Curtiu";
-			}else {
-				List<Funcionario> funcionarioCurtidores = post.getListaFuncionariosCurtidores().stream().filter(f-> !f.getCpf().equals(cpf)).collect(Collectors.toList());
+			}
+			else {
+				List<Funcionario> funcionarioCurtidores = post.getListaFuncionariosCurtidores().stream().filter(f-> !f.getCpf().equals(cpf))
+						.collect(Collectors.toList());
 				post.setListaFuncionariosCurtidores(funcionarioCurtidores);
-				postRepositorio.saveAndFlush(post);
+				postRepositorio.save(post);
 				return "Descurtiu";
 			}
-			
 		}
 		
 		throw new RecursoNaoEncontradoException("Post Nao encontrado");

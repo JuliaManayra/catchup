@@ -19,7 +19,9 @@ public class Parceria implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	private Date data;
+	
 	private String imagem;
 	
 	private String titulo;

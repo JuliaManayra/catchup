@@ -9,7 +9,6 @@ import javax.validation.constraints.Email;
 import org.hibernate.validator.constraints.br.CPF;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class FuncionarioEditarDto {
 	
@@ -35,18 +34,18 @@ public class FuncionarioEditarDto {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "000.000.000-00")
 	private String cpf;
 	
-	@JsonIgnore
-	private Boolean status = true;
+	
+	private Boolean status;
 	
 	public FuncionarioEditarDto() {
 		
 	}
 
 	public FuncionarioEditarDto(Integer id, String nome, Integer idPerfil,
-			@CPF String cpf) {
+			@CPF String cpf,Boolean status) {
 		super();
 		this.nome = nome;
-		
+		this.status = status;
 		this.idPerfil = idPerfil;
 		this.cpf = mascaraCpf(cpf);
 		this.id =id;
