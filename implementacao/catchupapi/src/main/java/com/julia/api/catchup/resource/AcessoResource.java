@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.julia.api.catchup.dominio.dto.AcessoDto;
 import com.julia.api.catchup.dominio.dto.TokenDto;
@@ -35,6 +36,10 @@ public class AcessoResource {
 	@Autowired
 	private AutenticacaoService autenticacaoService;
 	
+		@RequestMapping(value = "", method = RequestMethod.GET)
+		public ModelAndView swagger() {
+			return new ModelAndView("redirect:/swagger-ui.html");
+		}
 	
 		@RequestMapping(value = "/acesso", method = RequestMethod.POST)
 		public ResponseEntity<String> acesso(@RequestBody @Valid AcessoDto acesso, HttpSession session) {

@@ -1,5 +1,7 @@
 package com.julia.api.catchup.implementacao;
 
+import java.util.Date;
+
 import com.julia.api.catchup.dominio.Aviso;
 import com.julia.api.catchup.dominio.dto.AvisoNovoDto;
 import com.julia.api.catchup.interfaces.MapperCatchupInterface;
@@ -12,7 +14,7 @@ public class SalvarAvisoNovoImplementacao implements   SalvarCatchupInterface<Av
 	public Boolean salvar(AvisoNovoDto entidade, AvisoRepositorio repositorio) {
 		MapperCatchupInterface<AvisoNovoDto, Aviso> mapper= new MapperAvisoNovoImplementacao();
 		Aviso aviso = mapper.dtoParaEntidade(entidade);
-		
+		aviso.setData(new Date());
 		repositorio.saveAndFlush(aviso);
 
 		if (aviso.getId() != null) {

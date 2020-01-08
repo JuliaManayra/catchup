@@ -72,6 +72,7 @@ public class ConfiguracaoSeguranca extends WebSecurityConfigurerAdapter {
         .authenticationEntryPoint(catchUpAutenticacaoEntryPoint)
         .and()
         .authorizeRequests()
+        .antMatchers(HttpMethod.GET, "/").permitAll()
 		.antMatchers(HttpMethod.GET, "/topicos").permitAll()
 		.antMatchers(HttpMethod.GET, "/topicos/*").permitAll()
 		.antMatchers(HttpMethod.POST, "/acesso").permitAll()
