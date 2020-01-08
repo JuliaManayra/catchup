@@ -1,5 +1,6 @@
 package com.julia.api.catchup.seguranca;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,7 +13,10 @@ import org.springframework.stereotype.Service;
 
 import com.julia.api.catchup.dominio.dto.AcessoDto;
 import com.julia.api.catchup.dominio.view.Usuario;
+import com.julia.api.catchup.repositorio.PerfilRepositorio;
 import com.julia.api.catchup.service.UsuarioService;
+
+import com.julia.api.catchup.dominio.Perfil;
 
 
 @Service
@@ -21,6 +25,8 @@ public class AutenticacaoService  implements UserDetailsService {
 	@Autowired
 	private UsuarioService usuarioService; 
 	
+	@Autowired
+	private PerfilRepositorio perfilRepositorio;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -56,5 +62,10 @@ public class AutenticacaoService  implements UserDetailsService {
 			 return cpf.substring(0,3)+"."+cpf.substring(3,6)+"."+cpf.substring(6,9)+"-"+cpf.substring(9,11);
 		 }
 		return cpf;
+	}
+	
+	
+	public List<Perfil> listaPerfisSistema(){
+		return perfilRepositorio.findAll();
 	}
 }

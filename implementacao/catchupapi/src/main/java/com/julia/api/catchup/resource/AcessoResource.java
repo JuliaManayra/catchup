@@ -21,7 +21,11 @@ import com.julia.api.catchup.dominio.dto.AcessoDto;
 import com.julia.api.catchup.dominio.dto.TokenDto;
 import com.julia.api.catchup.excessao.RecursoNaoEncontradoException;
 import com.julia.api.catchup.seguranca.AutenticacaoService;
+import com.julia.api.catchup.dominio.Perfil;
 import com.julia.api.catchup.service.TokenService;
+
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 @RestController
@@ -65,6 +69,16 @@ public class AcessoResource {
 				return ResponseEntity.badRequest().build();
 			}
 		
+		}
+		
+		
+		@RequestMapping("/perfis")
+		public ResponseEntity<List<Perfil>> perfis(@RequestBody @Valid AcessoDto acesso, HttpSession session) {
+			try {
+				return ResponseEntity.ok(autenticacaoService.listaPerfisSistema());
+			}catch (Exception e) {
+				return ResponseEntity.badRequest().build();
+			}
 		}
 	
 }
