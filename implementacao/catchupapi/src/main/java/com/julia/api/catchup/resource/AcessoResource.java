@@ -72,7 +72,7 @@ public class AcessoResource {
 		}
 		
 		
-		@RequestMapping("/perfis")
+		@RequestMapping(value="/perfis", method = RequestMethod.GET)
 		public ResponseEntity<List<Perfil>> perfis(@RequestBody @Valid AcessoDto acesso, HttpSession session) {
 			try {
 				return ResponseEntity.ok(autenticacaoService.listaPerfisSistema());
