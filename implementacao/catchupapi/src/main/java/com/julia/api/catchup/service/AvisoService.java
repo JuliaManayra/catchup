@@ -80,8 +80,11 @@ public class AvisoService{
 		return crud.listarTodos(avisoRepositorio);
 	}
 	
+	
+	
 
 	public List<AvisoVisualizarDto> listarTodosMeusAvisos(HttpSession session) {
+	
 		String cpf = (String) session.getAttribute("cpf");
 		VisualizarAvisoPorParametroImplementacao crud = new VisualizarAvisoPorParametroImplementacao();
 		return crud.listarTodos(cpf,avisoRepositorio);

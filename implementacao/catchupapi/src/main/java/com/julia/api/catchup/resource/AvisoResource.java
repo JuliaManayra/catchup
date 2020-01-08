@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.julia.api.catchup.dominio.dto.AvisoEditarDto;
@@ -79,8 +80,13 @@ public class AvisoResource {
 	}
 	
 	@GetMapping(value = "/meus")
-	public ResponseEntity<List<AvisoVisualizarDto>> todosMeusAvisos( HttpSession session) {
+	public ResponseEntity<List<AvisoVisualizarDto>> todosMeusAvisos(@RequestParam(value="pagina", defaultValue="0") Integer pagina, 
+			@RequestParam(value="linhasPorPagina", defaultValue="24") Integer linhasPorPagina,
+			@RequestParam(value="ordemPor", defaultValue="titulo") String ordemPor,
+			@RequestParam(value="direcao", defaultValue="ASC") String direcao, 
+			HttpSession session) {
 		try {
+			
 			List<AvisoVisualizarDto> dto = avisoService.listarTodosMeusAvisos(session);
 			return ResponseEntity.ok(dto);
 		}catch (Exception e) {
