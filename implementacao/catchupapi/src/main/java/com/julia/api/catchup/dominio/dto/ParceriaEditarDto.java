@@ -8,7 +8,7 @@ public class ParceriaEditarDto {
 
 	@JsonIgnore
 	private Integer id;
-	
+
 	@JsonIgnore
 	private Date data;
 
@@ -21,15 +21,14 @@ public class ParceriaEditarDto {
 	@JsonIgnore
 	private Integer idFuncionario;
 
-
 	private String telefone;
 
 	private String endereco;
 
 	private Integer idAreaAtuacao;
+
 	
-	
-	
+
 	public ParceriaEditarDto(Integer id, String imagem, String titulo, String descricao) {
 		super();
 		this.imagem = imagem;
@@ -110,9 +109,4 @@ public class ParceriaEditarDto {
 		this.idAreaAtuacao = idAreaAtuacao;
 	}
 
-	
-	
-	
-	
-	
 }

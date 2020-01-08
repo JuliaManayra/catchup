@@ -20,6 +20,10 @@ public class AvisoEditarDto {
 	@JsonIgnore
 	private Integer idFuncionario;
 	
+	
+
+	
+	
 	public AvisoEditarDto(Integer id, String imagem, String titulo, String descricao) {
 		super();
 		this.imagem = imagem;

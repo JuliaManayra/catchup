@@ -95,6 +95,8 @@ public class Aviso implements Serializable{
 		this.funcionario = funcionario;
 	}
 
+	
+	
 
 	@Override
 	public int hashCode() {
@@ -121,6 +123,11 @@ public class Aviso implements Serializable{
 			return false;
 		return true;
 	}
+
+
+	
+	
+	
 	
 	
 }

@@ -1,7 +1,9 @@
 package com.julia.api.catchup.dominio.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.julia.api.catchup.dominio.validacao.AlterarSenha;
 
+@AlterarSenha
 public class FuncionarioEditarSenhaDto {
 	
 	@JsonIgnore
@@ -9,6 +11,7 @@ public class FuncionarioEditarSenhaDto {
 	
 	
 	private String senha;
+	
 	public Integer getId() {
 		return id;
 	}

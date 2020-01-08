@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+
 @Entity
 public class Post implements Serializable{
 	
@@ -109,6 +110,8 @@ public class Post implements Serializable{
 	public void setListaFuncionariosCurtidores(List<Funcionario> listaFuncionariosCurtidores) {
 		this.listaFuncionariosCurtidores = listaFuncionariosCurtidores;
 	}
+
+
 
 
 	@Override

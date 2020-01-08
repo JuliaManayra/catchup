@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+
 @Entity
 public class Parceria implements Serializable{
 	
@@ -38,7 +39,8 @@ public class Parceria implements Serializable{
 	
 	private String endereco;
 	
-
+	
+	
 	@ManyToOne
 	@JoinColumn(name="fk_area_atuacao")
 	private AreaAtuacao areaAtuacao;

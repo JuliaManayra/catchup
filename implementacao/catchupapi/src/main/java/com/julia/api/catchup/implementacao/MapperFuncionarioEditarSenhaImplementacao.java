@@ -2,14 +2,12 @@ package com.julia.api.catchup.implementacao;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.config.Configuration.AccessLevel;
 import org.modelmapper.convention.MatchingStrategies;
 
 import com.julia.api.catchup.dominio.Funcionario;
-import com.julia.api.catchup.dominio.dto.FuncionarioEditarDto;
 import com.julia.api.catchup.dominio.dto.FuncionarioEditarSenhaDto;
 import com.julia.api.catchup.interfaces.MapperCatchupInterface;
 
