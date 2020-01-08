@@ -2,17 +2,21 @@ package com.julia.api.catchup.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.julia.api.catchup.dominio.Funcionario;
 import com.julia.api.catchup.dominio.Post;
 import com.julia.api.catchup.dominio.dto.PostEditarDto;
 import com.julia.api.catchup.dominio.dto.PostNovoDto;
 import com.julia.api.catchup.dominio.dto.PostVisualizarDto;
 import com.julia.api.catchup.dominio.view.Usuario;
+import com.julia.api.catchup.excessao.RecursoNaoEncontradoException;
 import com.julia.api.catchup.excessao.SemPermissaoEditarPostException;
 import com.julia.api.catchup.implementacao.EditarPostImplementacao;
 import com.julia.api.catchup.implementacao.SalvarPostNovoImplementacao;
@@ -58,9 +62,9 @@ public class PostService{
 
 	private Boolean verificaEdicao(PostEditarDto entidade, HttpSession session) {
 		String cpf = (String) session.getAttribute("cpf");
-		Optional<Post> PostOptional = postRepositorio.findById(entidade.getId());
-		if(PostOptional.isPresent()) {
-			Post post = PostOptional.get();
+		Optional<Post> postOptional = postRepositorio.findById(entidade.getId());
+		if(postOptional.isPresent()) {
+			Post post = postOptional.get();
 			if(post.getFuncionario()!=null && post.getFuncionario().getCpf().equals(cpf)) {
 				return true;
 			}
@@ -86,4 +90,31 @@ public class PostService{
 		return crud.listarTodos(cpf,postRepositorio);
 	}
 	
+	@Transactional
+	public String curtirPost(Integer id, HttpSession session) {
+		Optional<Post> postOptional = postRepositorio.findById(id);
+		if(postOptional.isPresent()) {
+			Post post = postOptional.get();
+			String cpf = (String) session.getAttribute("cpf");
+			
+			if(post.getListaFuncionariosCurtidores().stream().filter(f-> f.getCpf().equals(cpf)).count() == 0) 
+			{
+				Usuario usuario =(Usuario) usuarioService.pesquisaUsuario(cpf);
+				Funcionario funcionario = new Funcionario();
+				funcionario.setId(usuario.getId());
+				post.getListaFuncionariosCurtidores().add(funcionario);
+				postRepositorio.saveAndFlush(post);
+				return "Curtiu";
+			}else {
+				List<Funcionario> funcionarioCurtidores = post.getListaFuncionariosCurtidores().stream().filter(f-> !f.getCpf().equals(cpf)).collect(Collectors.toList());
+				post.setListaFuncionariosCurtidores(funcionarioCurtidores);
+				postRepositorio.saveAndFlush(post);
+				return "Descurtiu";
+			}
+			
+		}
+		
+		throw new RecursoNaoEncontradoException("Post Nao encontrado");
+		
+	}
 }

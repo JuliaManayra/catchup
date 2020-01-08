@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.julia.api.catchup.dominio.dto.PostEditarDto;
 import com.julia.api.catchup.dominio.dto.PostNovoDto;
 import com.julia.api.catchup.dominio.dto.PostVisualizarDto;
+import com.julia.api.catchup.excessao.RecursoNaoEncontradoException;
 import com.julia.api.catchup.excessao.SemPermissaoEditarPostException;
 import com.julia.api.catchup.service.PostService;
 
@@ -30,14 +31,14 @@ import com.julia.api.catchup.service.PostService;
 public class PostResource {
 	
 	@Autowired
-	private PostService PostService;
+	private PostService postService;
 	
 
 	
 	@GetMapping(value = "/pesquisar/{id}")
 	public ResponseEntity<PostVisualizarDto> pesquisarId(@PathVariable Integer id) {
 		try {
-			PostVisualizarDto dto = PostService.visualisarPostId(id);
+			PostVisualizarDto dto = postService.visualisarPostId(id);
 			return ResponseEntity.ok(dto);
 		}catch (Exception e) {
 			return new ResponseEntity<>(new PostVisualizarDto(), null, HttpStatus.NOT_FOUND);
@@ -48,7 +49,7 @@ public class PostResource {
 	@PostMapping(value = "/novo")
 	public ResponseEntity<String> salvarNovo(@RequestBody @Valid  PostNovoDto PostNovo, HttpSession session) {
 		try {
-			PostService.salvar(PostNovo,session);
+			postService.salvar(PostNovo,session);
 			return ResponseEntity.ok("Cadastrado com Sucesso!");
 		}catch (Exception e) {
 			return new ResponseEntity<>("false", null, HttpStatus.BAD_REQUEST);
@@ -58,10 +59,22 @@ public class PostResource {
 	@PutMapping(value = "/editar")
 	public ResponseEntity<String> salvarEditar(@RequestBody @Valid  PostEditarDto PostNovo,  HttpSession session) {
 		try {
-			 PostService.editar(PostNovo,session);
+			postService.editar(PostNovo,session);
 			return ResponseEntity.ok("Editado com Sucesso!");
 		}catch (SemPermissaoEditarPostException e) {
 			return new ResponseEntity<>("O usuario nao tem permissao de editar este Post, pois nao e o dono!", null, HttpStatus.FORBIDDEN);
+		}catch (Exception e) {
+			return new ResponseEntity<>("false", null, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@PutMapping(value = "/curtir/{id}")
+	public ResponseEntity<String> salvarEditar(@PathVariable("id")  Integer id,  HttpSession session) {
+		try {
+			 String saida = postService.curtirPost(id, session);
+			return ResponseEntity.ok(saida +" com Sucesso!");
+		}catch (RecursoNaoEncontradoException e) {
+			return new ResponseEntity<>("Post nao encontrado", null, HttpStatus.FORBIDDEN);
 		}catch (Exception e) {
 			return new ResponseEntity<>("false", null, HttpStatus.BAD_REQUEST);
 		}
@@ -71,7 +84,7 @@ public class PostResource {
 	@GetMapping(value = "/todos")
 	public ResponseEntity<List<PostVisualizarDto>> todosPosts() {
 		try {
-			List<PostVisualizarDto> dto = PostService.listarTodosPosts();
+			List<PostVisualizarDto> dto = postService.listarTodosPosts();
 			return ResponseEntity.ok(dto);
 		}catch (Exception e) {
 			return new ResponseEntity<>(new ArrayList<>(), null, HttpStatus.NOT_FOUND);
@@ -81,7 +94,7 @@ public class PostResource {
 	@GetMapping(value = "/meus")
 	public ResponseEntity<List<PostVisualizarDto>> todosMeusPosts( HttpSession session) {
 		try {
-			List<PostVisualizarDto> dto = PostService.listarTodosMeusPosts(session);
+			List<PostVisualizarDto> dto = postService.listarTodosMeusPosts(session);
 			return ResponseEntity.ok(dto);
 		}catch (Exception e) {
 			return new ResponseEntity<>(new ArrayList<>(), null, HttpStatus.NOT_FOUND);
