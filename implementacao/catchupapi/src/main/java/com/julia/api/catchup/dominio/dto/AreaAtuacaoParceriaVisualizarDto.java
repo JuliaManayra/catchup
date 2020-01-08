@@ -3,6 +3,7 @@ package com.julia.api.catchup.dominio.dto;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class AreaAtuacaoParceriaVisualizarDto {
 	
@@ -21,6 +22,8 @@ public class AreaAtuacaoParceriaVisualizarDto {
 	
 	private String filialFuncionarioCriador;
 	
+	@JsonIgnore
+	private Integer idAreaAtuacao;
 	
 	private String telefone;
 
@@ -123,6 +126,18 @@ public class AreaAtuacaoParceriaVisualizarDto {
 
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
+	}
+
+
+
+	public Integer getIdAreaAtuacao() {
+		return idAreaAtuacao;
+	}
+
+
+
+	public void setIdAreaAtuacao(Integer idAreaAtuacao) {
+		this.idAreaAtuacao = idAreaAtuacao;
 	}
 
 

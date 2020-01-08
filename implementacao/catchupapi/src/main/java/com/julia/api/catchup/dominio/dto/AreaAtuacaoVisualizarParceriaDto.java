@@ -2,11 +2,9 @@ package com.julia.api.catchup.dominio.dto;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 public class AreaAtuacaoVisualizarParceriaDto {
 	
-	@JsonIgnore
+//	@JsonIgnore
 	private Integer id;
 	
 	private String descricao;
@@ -18,9 +16,9 @@ public class AreaAtuacaoVisualizarParceriaDto {
 		
 	}
 	
-	public AreaAtuacaoVisualizarParceriaDto(String descricao) {
+	public AreaAtuacaoVisualizarParceriaDto(Integer id, String descricao) {
 		super();
-		this.id= null;
+		this.id= id;
 		this.descricao = descricao;
 	}
 	
@@ -37,4 +35,15 @@ public class AreaAtuacaoVisualizarParceriaDto {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
+	public List<AreaAtuacaoParceriaVisualizarDto> getListaParcerias() {
+		return listaParcerias;
+	}
+
+	public void setListaParcerias(List<AreaAtuacaoParceriaVisualizarDto> listaParcerias) {
+		this.listaParcerias = listaParcerias;
+	}
+	
+	
+	
 }

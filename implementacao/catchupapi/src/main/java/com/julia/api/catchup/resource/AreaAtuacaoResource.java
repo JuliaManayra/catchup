@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.julia.api.catchup.dominio.dto.AreaAtuacaoEditarDto;
 import com.julia.api.catchup.dominio.dto.AreaAtuacaoNovoDto;
-import com.julia.api.catchup.dominio.dto.AreaAtuacaoParceriaVisualizarDto;
 import com.julia.api.catchup.dominio.dto.AreaAtuacaoVisualizarDto;
+import com.julia.api.catchup.dominio.dto.AreaAtuacaoVisualizarParceriaDto;
 import com.julia.api.catchup.excessao.SemPermissaoEditarAreaAtuacaoException;
 import com.julia.api.catchup.service.AreaAtuacaoService;
 
@@ -47,12 +47,12 @@ public class AreaAtuacaoResource {
 	
 	
 	@GetMapping(value = "/pesquisar/parcerias/{idAreaAtuacao}")
-	public ResponseEntity<AreaAtuacaoParceriaVisualizarDto> pesquisarParceriasId(@PathVariable("idAreaAtuacao") Integer id) {
+	public ResponseEntity<AreaAtuacaoVisualizarParceriaDto> pesquisarParceriasId(@PathVariable("idAreaAtuacao") Integer id) {
 		try {
-			AreaAtuacaoParceriaVisualizarDto dto = AreaAtuacaoService.visualisarAreaAtuacaoParceriaId(id);
+			AreaAtuacaoVisualizarParceriaDto dto = AreaAtuacaoService.visualisarAreaAtuacaoParceriaId(id);
 			return ResponseEntity.ok(dto);
 		}catch (Exception e) {
-			return new ResponseEntity<>(new AreaAtuacaoParceriaVisualizarDto(), null, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(new AreaAtuacaoVisualizarParceriaDto(), null, HttpStatus.NOT_FOUND);
 		}
 	}
 	

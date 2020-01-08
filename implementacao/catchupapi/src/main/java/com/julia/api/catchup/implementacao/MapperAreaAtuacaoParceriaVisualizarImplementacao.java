@@ -8,32 +8,33 @@ import org.modelmapper.config.Configuration.AccessLevel;
 import org.modelmapper.convention.MatchingStrategies;
 
 import com.julia.api.catchup.dominio.AreaAtuacao;
-import com.julia.api.catchup.dominio.dto.AreaAtuacaoParceriaVisualizarDto;
+import com.julia.api.catchup.dominio.dto.AreaAtuacaoVisualizarParceriaDto;
 import com.julia.api.catchup.interfaces.MapperCatchupInterface;
 
-public class MapperAreaAtuacaoParceriaVisualizarImplementacao implements MapperCatchupInterface<AreaAtuacaoParceriaVisualizarDto,AreaAtuacao >{
+public class MapperAreaAtuacaoParceriaVisualizarImplementacao implements MapperCatchupInterface<AreaAtuacaoVisualizarParceriaDto,AreaAtuacao >{
 
 
 	@Override
-	public AreaAtuacao dtoParaEntidade(AreaAtuacaoParceriaVisualizarDto  element) {
+	public AreaAtuacao dtoParaEntidade(AreaAtuacaoVisualizarParceriaDto  element) {
 		ModelMapper modelMapper = new ModelMapper();
-		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE)
-				.setFieldAccessLevel(AccessLevel.PRIVATE).setFieldMatchingEnabled(true);
+		modelMapper.getConfiguration()
+		.setFieldMatchingEnabled(true)
+		.setFieldAccessLevel(AccessLevel.PRIVATE);
 
 		return modelMapper.map(element, AreaAtuacao.class);
 	}
 
 	@Override
-	public AreaAtuacaoParceriaVisualizarDto entidadeParaDto(AreaAtuacao  element) {
+	public AreaAtuacaoVisualizarParceriaDto entidadeParaDto(AreaAtuacao  element) {
 		ModelMapper modelMapper = new ModelMapper();
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE)
 				.setFieldAccessLevel(AccessLevel.PRIVATE).setFieldMatchingEnabled(true);
 
-		return modelMapper.map(element, AreaAtuacaoParceriaVisualizarDto.class);
+		return modelMapper.map(element, AreaAtuacaoVisualizarParceriaDto.class);
 	}
 
 	@Override
-	public List<AreaAtuacaoParceriaVisualizarDto> listaEntidadeParaDto(List<AreaAtuacao> element) {
+	public List<AreaAtuacaoVisualizarParceriaDto> listaEntidadeParaDto(List<AreaAtuacao> element) {
 		return element.stream().map(this::entidadeParaDto)
 				.collect(Collectors.toList());
 	}

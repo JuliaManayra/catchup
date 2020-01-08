@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 import com.julia.api.catchup.dominio.AreaAtuacao;
 import com.julia.api.catchup.dominio.dto.AreaAtuacaoEditarDto;
 import com.julia.api.catchup.dominio.dto.AreaAtuacaoNovoDto;
-import com.julia.api.catchup.dominio.dto.AreaAtuacaoParceriaVisualizarDto;
 import com.julia.api.catchup.dominio.dto.AreaAtuacaoVisualizarDto;
+import com.julia.api.catchup.dominio.dto.AreaAtuacaoVisualizarParceriaDto;
 import com.julia.api.catchup.dominio.view.Usuario;
 import com.julia.api.catchup.excessao.SemPermissaoEditarAreaAtuacaoException;
 import com.julia.api.catchup.implementacao.EditarAreaAtuacaoImplementacao;
@@ -70,7 +70,7 @@ public class AreaAtuacaoService{
 		return crud.pesquisarId(id, areaAtuacaoRepositorio);
 	}
 	
-	public AreaAtuacaoParceriaVisualizarDto visualisarAreaAtuacaoParceriaId(Integer id) {
+	public AreaAtuacaoVisualizarParceriaDto visualisarAreaAtuacaoParceriaId(Integer id) {
 		VisualizarAreaAtuacaoParceriaImplementacao crud = new VisualizarAreaAtuacaoParceriaImplementacao();
 		return crud.pesquisarId(id, areaAtuacaoRepositorio);
 	}

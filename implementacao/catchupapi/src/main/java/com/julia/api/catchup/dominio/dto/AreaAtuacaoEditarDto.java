@@ -1,19 +1,16 @@
 package com.julia.api.catchup.dominio.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 public class AreaAtuacaoEditarDto {
 	
-	@JsonIgnore
 	private Integer id;
 	
 	private String descricao;
 	
 	
 	
-	public AreaAtuacaoEditarDto(String descricao) {
+	public AreaAtuacaoEditarDto(Integer id, String descricao) {
 		super();
-		this.id= null;
+		this.id= id;
 		this.descricao = descricao;
 	}
 	

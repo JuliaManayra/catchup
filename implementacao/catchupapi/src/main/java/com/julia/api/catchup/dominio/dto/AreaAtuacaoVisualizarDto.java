@@ -11,9 +11,9 @@ public class AreaAtuacaoVisualizarDto {
 		
 	}
 	
-	public AreaAtuacaoVisualizarDto(String descricao) {
+	public AreaAtuacaoVisualizarDto(Integer id, String descricao) {
 		super();
-		this.id= null;
+		this.id= id;
 		this.descricao = descricao;
 	}
 	

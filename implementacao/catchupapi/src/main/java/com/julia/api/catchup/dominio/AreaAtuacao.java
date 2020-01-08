@@ -22,7 +22,7 @@ public class AreaAtuacao {
 
 	@JsonIgnore
 	@OneToMany(mappedBy="areaAtuacao", cascade=CascadeType.ALL)
-	private List<Parceria> perfil;
+	private List<Parceria> listaParcerias;
 	
 	
 	public Integer getId() {
@@ -44,12 +44,13 @@ public class AreaAtuacao {
 	
 	
 	
-	public List<Parceria> getPerfil() {
-		return perfil;
+
+	public List<Parceria> getListaParcerias() {
+		return listaParcerias;
 	}
 
-	public void setPerfil(List<Parceria> perfil) {
-		this.perfil = perfil;
+	public void setListaParcerias(List<Parceria> listaParcerias) {
+		this.listaParcerias = listaParcerias;
 	}
 
 	@Override
